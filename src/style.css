@@ -27,7 +27,7 @@
       background: transparent;
     }
     .nav-inner {
-      width: min(88vw, 1080px);
+      width: min(98vw, 1080px);
       display: flex; align-items: center; justify-content: space-between;
       padding: 10px 10px 10px 20px;
       background: rgba(12, 9, 7, 0.72);
