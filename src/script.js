@@ -251,6 +251,7 @@ async function handleBookingSubmit(e) {
   } catch (err) {
     errEl.textContent = "Network error. Try again.";
     errEl.style.display = "block";
+  } finally {
     btn.disabled = false;
     btn.textContent = "Confirm Booking";
   }
