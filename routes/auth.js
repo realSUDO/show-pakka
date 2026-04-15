@@ -2,11 +2,12 @@ import express from "express";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import pool from "../db/pool.js";
+import { authSchema, validate } from "../middleware/validate.js";
 
 const router = express.Router();
 
 // post /auth/register
-router.post("/register", async (req, res) => {
+router.post("/register", validate(authSchema), async (req, res) => {
 	try {
 		const { email, password } = req.body;
 
@@ -48,7 +49,7 @@ router.post("/register", async (req, res) => {
 
 // post /auth/login
 
-router.post("/login", async (req, res) => {
+router.post("/login", validate(authSchema), async (req, res) => {
 	try {
 		const { email, password } = req.body;
 

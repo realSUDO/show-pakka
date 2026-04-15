@@ -21,7 +21,7 @@ const app = new express();
 app.use(cors());
 app.use(express.json()); // REQUIRED: parses JSON req bodies to req.body
 
-app.get("/", (req, res) => {
+app.get("/", (_, res) => {
   res.sendFile(__dirname + "/index.html");
 });
 
