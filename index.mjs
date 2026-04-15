@@ -7,6 +7,7 @@ import cors from "cors";
 import authRoutes from "./routes/auth.js";
 import seatRoutes from "./routes/seats.js";
 import bookingRoutes from "./routes/bookings.js";
+import { migrate } from "./db/migrate.js";
 
 dotenv.config();
 
@@ -36,4 +37,6 @@ app.use("/seats", seatRoutes);
 app.use("/bookings", bookingRoutes);
 
 
-app.listen(port, () => console.log("Server starting on port: " + port));
+migrate().then(() => {
+  app.listen(port, () => console.log(`Server starting on port: ${port}`));
+});
