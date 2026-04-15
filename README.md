@@ -34,7 +34,7 @@ A full-stack movie ticket booking platform with JWT authentication, per-movie se
 ## Project Structure
 
 ```
-book-my-ticket/
+show-pakka/
 ├── db/
 │   ├── pool.js          # PostgreSQL connection pool
 │   └── schema.sql       # All table definitions + seed data
@@ -65,7 +65,7 @@ book-my-ticket/
 
 ```bash
 git clone <your-repo-url>
-cd book-my-ticket
+cd show-pakka
 npm install
 ```
 
