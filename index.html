@@ -1,72 +1,147 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Stellar Seat Booking</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-      @import url("https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap");
-      body {
-        font-family: "Outfit", sans-serif;
-        background-color: #0f172a;
-        color: #f8fafc;
-      }
-    </style>
-  </head>
-  <body
-    class="min-h-screen flex items-center justify-center p-6 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900"
-  >
-    <div
-      class="max-w-7xl w-full bg-slate-800/80 backdrop-blur-xl rounded-3xl shadow-2xl p-10 border border-slate-700/50"
-    >
-      <div class="text-center mb-10">
-        <h1
-          class="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400 mb-4 tracking-tight"
-        >
-          ChaiCode Cinema - Now Showing<br />
-          <br />
-          <span class="text-red-400">
-            <span class="font-bold">Dhurandhar The Revenge</span>
-          </span>
-        </h1>
-        <p class="text-slate-400 text-lg">Jassi ko ghar ki yaad kyu nhi aai?</p>
-      </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CinemaBook</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <link rel="stylesheet" href="/src/style.css" />
+</head>
+<body>
 
-      <div class="flex justify-center mb-10">
-        <div
-          class="bg-slate-900/50 rounded-full px-6 py-3 border border-slate-700 flex gap-8 items-center"
-        >
-          <div class="flex items-center gap-3">
-            <div
-              class="w-4 h-4 rounded-full bg-emerald-500 shadow-[0_0_12px_rgba(16,185,129,0.6)]"
-            ></div>
-            <span class="text-slate-300 font-medium tracking-wide"
-              >Available</span
-            >
-          </div>
-          <div class="w-px h-6 bg-slate-700"></div>
-          <div class="flex items-center gap-3">
-            <div
-              class="w-4 h-4 rounded-full bg-rose-500/20 border border-rose-500/50"
-            ></div>
-            <span class="text-slate-400 font-medium tracking-wide">Booked</span>
-          </div>
-        </div>
-      </div>
+<!-- Toast -->
+<div id="toast"></div>
 
-      <div class="flex justify-center">
-        <div
-          class="bg-slate-900/40 p-8 rounded-2xl border border-slate-700/50 shadow-inner"
-        >
-          <table
-            id="tbl"
-            class="border-separate border-spacing-4 mx-auto"
-          ></table>
-        </div>
-      </div>
+<!-- ══════════════════════════════════════════════
+     SCREEN 1: MOVIES
+══════════════════════════════════════════════ -->
+<div id="screen-movies" class="screen active">
+  <nav>
+    <div class="nav-logo"><div class="nav-logo-dot"></div>CinemaBook</div>
+    <div class="nav-right">
+      <div id="nav-user" class="nav-email" style="display:none"></div>
+      <button class="btn btn-outline" onclick="showMyBookings()">
+        <i data-lucide="ticket" style="width:14px;height:14px"></i> My Bookings
+      </button>
+      <button id="nav-auth-btn" class="btn btn-primary" onclick="openAuthModal()">Login</button>
     </div>
+  </nav>
+  <div class="movies-container">
+    <div class="movies-hero">
+      <div class="movies-hero-label">What's on tonight</div>
+      <div class="section-title">Now Showing</div>
+      <div class="section-sub">Select a movie to choose your seats</div>
+    </div>
+    <div class="movies-grid" id="movies-grid"></div>
+  </div>
+</div>
 
-    <script src="src/script.js"></script>
-  </body>
+<!-- ══════════════════════════════════════════════
+     SCREEN 2: SEAT SELECTION
+══════════════════════════════════════════════ -->
+<div id="screen-seats" class="screen">
+  <nav>
+    <div class="nav-logo"><div class="nav-logo-dot"></div>CinemaBook</div>
+    <div class="nav-right">
+      <div id="nav-user-seats" class="nav-email" style="display:none"></div>
+    </div>
+  </nav>
+    <div class="seat-screen-inner">
+    <button class="back-btn" onclick="showMovies()"><i data-lucide="arrow-left" style="width:16px;height:16px"></i> <span id="back-movie-title">Back</span></button>
+    <div class="screen-display">SCREEN THIS SIDE</div>
+    <div class="seat-map" id="seat-map"></div>
+    <div class="seat-legend">
+      <div class="legend-item"><div class="legend-dot available"></div> Available</div>
+      <div class="legend-item"><div class="legend-dot selected"></div> Selected</div>
+      <div class="legend-item"><div class="legend-dot booked"></div> Booked</div>
+    </div>
+    <div class="booking-bar">
+      <div>
+        <div class="booking-bar-info">Selected: <strong id="selected-count">0</strong> seat(s)</div>
+        <div class="selected-seats-label" id="selected-seats-label">—</div>
+      </div>
+      <button class="btn btn-primary" id="book-seats-btn" onclick="onBookSeats()" disabled>Book Seats</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     SCREEN 3: SUCCESS
+══════════════════════════════════════════════ -->
+<div id="screen-success" class="screen">
+  <div class="success-screen-inner">
+    <div class="success-icon"><i data-lucide="check" style="width:40px;height:40px;color:#4CAF50"></i></div>
+    <div class="success-title">Booking Confirmed!</div>
+    <div class="success-sub">Your seats have been reserved successfully.</div>
+    <div class="success-card" id="success-details"></div>
+    <div class="success-actions">
+      <button class="btn btn-primary" onclick="showMyBookings()">View My Bookings</button>
+      <button class="btn btn-ghost" onclick="showMovies()">Back to Movies</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     SCREEN 4: MY BOOKINGS
+══════════════════════════════════════════════ -->
+<div id="screen-bookings" class="screen">
+  <nav>
+    <div class="nav-logo"><div class="nav-logo-dot"></div>CinemaBook</div>
+    <div class="nav-right">
+      <button class="btn btn-ghost" onclick="showMovies()" style="display:flex;align-items:center;gap:6px;"><i data-lucide="arrow-left" style="width:15px;height:15px"></i> Back to Movies</button>
+    </div>
+  </nav>
+  <div class="bookings-container">
+    <div class="section-title">My Bookings</div>
+    <div id="bookings-list"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     AUTH MODAL
+══════════════════════════════════════════════ -->
+<div class="modal-backdrop" id="auth-modal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeAuthModal()"><i data-lucide="x" style="width:16px;height:16px"></i></button>
+    <div class="auth-tabs">
+      <button class="auth-tab active" id="tab-register" onclick="switchAuthTab('register')">Register</button>
+      <button class="auth-tab" id="tab-login" onclick="switchAuthTab('login')">Login</button>
+    </div>
+    <div class="form-error" id="auth-error"></div>
+    <form id="auth-form" onsubmit="handleAuth(event)">
+      <div class="form-group">
+        <input class="form-input" id="auth-email" type="email" placeholder="Email address" required />
+      </div>
+      <div class="form-group">
+        <input class="form-input" id="auth-password" type="password" placeholder="Password (min. 6 characters)" required />
+      </div>
+      <button type="submit" class="btn btn-primary" id="auth-submit" style="width:100%;padding:13px;font-size:14px;margin-top:4px;justify-content:center;">Continue</button>
+    </form>
+    <div class="form-footer" id="auth-footer">
+      Already have an account? <a onclick="switchAuthTab('login')">Sign in</a>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     BOOKING FORM MODAL
+══════════════════════════════════════════════ -->
+<div class="modal-backdrop" id="booking-modal">
+  <div class="modal booking-modal">
+    <button class="modal-close" onclick="closeBookingModal()"><i data-lucide="x" style="width:18px;height:18px"></i></button>
+    <div class="modal-title">Who's watching? 🍿</div>
+    <div class="booking-seats-summary" id="booking-seats-summary"></div>
+    <form id="booking-form" onsubmit="handleBookingSubmit(event)">
+      <div id="name-fields"></div>
+      <div class="form-error" id="booking-error"></div>
+      <button type="submit" class="btn btn-primary" id="booking-submit" style="width:100%;margin-top:8px;">
+        Confirm Booking
+      </button>
+    </form>
+  </div>
+</div>
+
+<script src="src/script.js"></script>
+</body>
 </html>

@@ -6,6 +6,7 @@ import cors from "cors";
 
 import authRoutes from "./routes/auth.js";
 import seatRoutes from "./routes/seats.js";
+import bookingRoutes from "./routes/bookings.js";
 
 dotenv.config();
 
@@ -24,10 +25,15 @@ app.use(express.json()); // REQUIRED: parses JSON req bodies to req.body
 app.get("/", (_, res) => {
   res.sendFile(__dirname + "/index.html");
 });
+app.use("/src", express.static(__dirname + "/src"));
+app.use("/public", express.static(__dirname + "/public"));
 
 //book a seat give the seatId and your name
-app.use("/auth",authRoutes);  // mounts: POST /auth/register .. POST /auth/login
-app.use("/seats",seatRoutes); // mounts: GET /seats .. PUT /seats/:id/:name
+app.get("/ping", (req, res) => res.json({ ok: true }));
+
+app.use("/auth", authRoutes);
+app.use("/seats", seatRoutes);
+app.use("/bookings", bookingRoutes);
 
 
 app.listen(port, () => console.log("Server starting on port: " + port));

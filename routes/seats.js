@@ -4,11 +4,13 @@ import { verifyToken } from "../middleware/auth.js";
 
 const router = express.Router();
 
-// get all seats - public route
-
+// GET /seats?movie_id=1 — public
 router.get("/", async (req, res) => {
-	const result = await pool.query("SELECT * FROM seats");
-	res.send(result.rows);
+  const { movie_id } = req.query;
+  const result = movie_id
+    ? await pool.query("SELECT * FROM seats WHERE movie_id = $1 ORDER BY id", [movie_id])
+    : await pool.query("SELECT * FROM seats ORDER BY id");
+  res.send(result.rows);
 });
 
 router.put("/:id/:name", verifyToken, async (req, res) => {
@@ -36,6 +38,11 @@ router.put("/:id/:name", verifyToken, async (req, res) => {
 			id,
 			name,
 		]);
+		// record in bookings table
+		await conn.query(
+			"INSERT INTO bookings (user_id, seat_id, name, movie_id) VALUES ($1, $2, $3, $4)",
+			[req.user.id, id, name, req.query.movie_id || null]
+		);
 
 		await conn.query("COMMIT");
 		conn.release();
