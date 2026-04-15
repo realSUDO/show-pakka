@@ -1,4 +1,4 @@
-# CinemaBook 🎬
+# Show Pakka!!!
 
 A full-stack movie ticket booking platform with JWT authentication, per-movie seat maps, and a dark cinematic UI.
 
