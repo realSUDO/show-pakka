@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CinemaBook</title>
+  <title>Show Pakka</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
   <link rel="stylesheet" href="/src/style.css" />
@@ -18,7 +18,7 @@
 ══════════════════════════════════════════════ -->
 <div id="screen-movies" class="screen active">
   <nav>
-    <div class="nav-logo"><div class="nav-logo-dot"></div>CinemaBook</div>
+    <div class="nav-logo"><div class="nav-logo-dot"></div>Show Pakka</div>
     <div class="nav-right">
       <div id="nav-user" class="nav-email" style="display:none"></div>
       <button class="btn btn-outline" onclick="showMyBookings()">
@@ -42,7 +42,7 @@
 ══════════════════════════════════════════════ -->
 <div id="screen-seats" class="screen">
   <nav>
-    <div class="nav-logo"><div class="nav-logo-dot"></div>CinemaBook</div>
+    <div class="nav-logo"><div class="nav-logo-dot"></div>Show Pakka</div>
     <div class="nav-right">
       <div id="nav-user-seats" class="nav-email" style="display:none"></div>
     </div>
@@ -87,7 +87,7 @@
 ══════════════════════════════════════════════ -->
 <div id="screen-bookings" class="screen">
   <nav>
-    <div class="nav-logo"><div class="nav-logo-dot"></div>CinemaBook</div>
+    <div class="nav-logo"><div class="nav-logo-dot"></div>Show Pakka</div>
     <div class="nav-right">
       <button class="btn btn-ghost" onclick="showMovies()" style="display:flex;align-items:center;gap:6px;"><i data-lucide="arrow-left" style="width:15px;height:15px"></i> Back to Movies</button>
     </div>
@@ -130,7 +130,7 @@
 <div class="modal-backdrop" id="booking-modal">
   <div class="modal booking-modal">
     <button class="modal-close" onclick="closeBookingModal()"><i data-lucide="x" style="width:18px;height:18px"></i></button>
-    <div class="modal-title">Who's watching? 🍿</div>
+    <div class="modal-title">Who's watching? </div>
     <div class="booking-seats-summary" id="booking-seats-summary"></div>
     <form id="booking-form" onsubmit="handleBookingSubmit(event)">
       <div id="name-fields"></div>
