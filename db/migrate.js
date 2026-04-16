@@ -32,10 +32,19 @@ export async function migrate() {
     await pool.query(`
       INSERT INTO seats (movie_id, isbooked)
       SELECT m.id, 0
-      FROM generate_series(1, 3) AS m(id)
+      FROM generate_series(1, 4) AS m(id)
       CROSS JOIN generate_series(1, 70)
     `);
-    console.log("Seeded 210 seats (70 per movie)");
+    console.log("Seeded 280 seats (70 per movie)");
+  } else {
+    // Top-up: add seats for any movie that has none yet
+    await pool.query(`
+      INSERT INTO seats (movie_id, isbooked)
+      SELECT m.id, 0
+      FROM generate_series(1, 4) AS m(id)
+      CROSS JOIN generate_series(1, 70)
+      WHERE NOT EXISTS (SELECT 1 FROM seats WHERE movie_id = m.id)
+    `);
   }
 
   console.log("Database ready");

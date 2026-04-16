@@ -132,16 +132,18 @@
       padding: 3px 8px; border-radius: 6px;
       font-size: 10px; font-weight: 600; color: var(--text); letter-spacing: 0.5px;
     }
-    .movie-info { padding: 18px; }
-    .movie-title { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 5px; line-height: 1.3; }
-    .movie-meta { font-size: 11px; color: var(--accent); margin-bottom: 16px; letter-spacing: 0.3px; }
-    .movie-select-btn {
-      width: 100%; padding: 10px; border-radius: 8px; font-size: 13px; font-weight: 600;
-      background: rgba(148,137,121,0.08);
-      border: 1px solid rgba(148,137,121,0.25);
-      color: var(--text); cursor: pointer; transition: all 0.2s; font-family: inherit;
+    .movie-info { padding: 12px 14px; }
+    .movie-title { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 3px; line-height: 1.3; }
+    .movie-meta { font-size: 11px; color: var(--accent); margin-bottom: 0; letter-spacing: 0.3px; }
+    .movie-hover-cta {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(0,0,0,0.45);
+      color: var(--text); font-size: 13px; font-weight: 600; letter-spacing: 0.5px;
+      opacity: 0; transition: opacity 0.25s;
+      border-radius: 0;
     }
-    .movie-select-btn:hover { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+    .movie-card:hover .movie-hover-cta { opacity: 1; }
 
     /* ── Seat Screen ── */
     .seat-screen-inner { max-width: 960px; margin: 0 auto; padding: 36px 40px 48px; }

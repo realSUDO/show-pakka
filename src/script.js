@@ -3,6 +3,7 @@ const MOVIES = [
   { id: 1, title: "Dhurandhar: The Revenge", meta: "2D | Hindi | U/A",   icon: "clapperboard", poster: "/public/assets/dhurandhar-the-revenge.jpg" },
   { id: 2, title: "Stellar Odyssey",          meta: "IMAX | English | A", icon: "rocket",       poster: "/public/assets/stellar.webp" },
   { id: 3, title: "The Last Monsoon",          meta: "2D | Hindi | U/A",  icon: "cloud-rain",   poster: "/public/assets/the-last-monsoon.jpg" },
+  { id: 4, title: "Cosmic SUDO",               meta: "IMAX | Hindi | U/A", icon: "sparkles",   poster: "/public/assets/cosmic-sudo.png" },
 ];
 
 // ── State ─────────────────────────────────────────────────────────────────────
@@ -63,11 +64,11 @@ function renderMovies() {
         </div>
         <div class="movie-poster-overlay"></div>
         <div class="movie-badge">${m.meta.split('|')[0].trim()}</div>
+        <div class="movie-hover-cta">Select Seats</div>
       </div>
       <div class="movie-info">
         <div class="movie-title">${m.title}</div>
         <div class="movie-meta">${m.meta}</div>
-        <button class="movie-select-btn">Select Seats</button>
       </div>
     </div>
   `).join("");
