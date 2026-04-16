@@ -343,8 +343,46 @@
       backdrop-filter: blur(8px);
     }
 
-    @media (max-width: 600px) {
-      nav { padding: 14px 20px; }
-      .movies-container, .seat-screen-inner, .bookings-container { padding: 24px 20px; }
-      .booking-bar { padding: 14px 20px; flex-direction: column; align-items: stretch; }
+    @media (max-width: 640px) {
+      /* Nav */
+      nav { padding: 12px 14px; }
+      .nav-inner { padding: 8px 12px; border-radius: 16px; }
+      .nav-logo { font-size: 14px; }
+      .nav-email { max-width: 110px; font-size: 11px; }
+      .btn { padding: 7px 12px; font-size: 12px; }
+
+      /* Movies */
+      .movies-container { padding: 24px 16px; }
+      .movies-hero { margin-bottom: 28px; }
+      .section-title { font-size: 22px; }
+      .movies-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
+      .movie-poster { height: 200px; }
+      .movie-info { padding: 12px; }
+      .movie-title { font-size: 13px; }
+
+      /* Seat screen */
+      .seat-screen-inner { padding: 20px 14px 40px; }
+      .screen-display { width: 90%; font-size: 9px; letter-spacing: 2px; }
+      .seat { width: 24px; height: 24px; border-radius: 4px 4px 2px 2px; }
+      .seat-row { gap: 3px; margin-bottom: 4px; }
+      .aisle { width: 10px; }
+      .row-label { width: 16px; font-size: 10px; }
+
+      /* Booking bar */
+      .booking-bar { flex-direction: column; align-items: stretch; gap: 12px; padding: 14px 16px; }
+      .booking-bar .btn { width: 100%; justify-content: center; }
+
+      /* Modals */
+      .modal { padding: 24px 20px; border-radius: 16px; }
+      .modal-backdrop { padding: 16px; align-items: flex-end; }
+      .modal { border-radius: 20px 20px 16px 16px; }
+
+      /* Bookings */
+      .bookings-container { padding: 24px 16px; }
+      .booking-card { padding: 16px; }
+      .booking-card-meta { gap: 10px; }
+
+      /* Success */
+      .success-screen-inner { padding: 48px 16px; }
+      .success-title { font-size: 22px; }
     }
