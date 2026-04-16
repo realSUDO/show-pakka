@@ -358,7 +358,7 @@
       .movies-hero { margin-bottom: 28px; }
       .section-title { font-size: 22px; }
       .movies-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
-      .movie-poster { height: 200px; }
+      .movie-poster { height: 260px; }
       .movie-info { padding: 12px; }
       .movie-title { font-size: 13px; }
 
