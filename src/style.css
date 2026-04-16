@@ -107,7 +107,7 @@
     .movie-card:hover::after { border-color: rgba(148,137,121,0.4); }
 
     .movie-poster {
-      height: 280px; position: relative; overflow: hidden;
+      height: 360px; position: relative; overflow: hidden;
       display: flex; align-items: center; justify-content: center;
       background: var(--card2);
     }
