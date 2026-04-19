@@ -138,12 +138,6 @@ curl -X PUT "http://localhost:8080/seats/1/YourName?movie_id=1" \
 
 ---
 
-## Deployment
-
-See [DEPLOY.md](./DEPLOY.md) for the full Render deployment guide.
-
----
-
 ## Database Schema
 
 ```sql
